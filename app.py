@@ -42,12 +42,13 @@ with col1:
 
 with col2:
     m_data = st.file_uploader("Upload file report excel!")
-    df_m = pd.read_excel(m_data, skiprows=[0])
-    
-    team1 = df_m['Team'][0]
-    team2 = df_m['Opponent'][0]
-    
-    df_m2 = df_m[['Name']]
+    try:
+        df_m = pd.read_excel(m_data, skiprows=[0])
+        team1 = df_m['Team'][0]
+        team2 = df_m['Opponent'][0]
+        df_m2 = df_m[['Name']]
+    except ValueError:
+        st.error("Please upload the excel report file")
 
 filter = st.selectbox('Select Team', [team1, team2])
 github_url = 'https://github.com/google/fonts/blob/main/ofl/poppins/Poppins-Bold.ttf'
