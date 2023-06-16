@@ -32,13 +32,12 @@ with col1:
     tl_data = st.file_uploader("Upload file timeline excel!")
     try:
         df_tl = pd.read_excel(tl_data, skiprows=[0])
+        df_t = df_tl[['Team','Act Name','Action', 'Min', 'Sub 1', 'Sub 2', 'Sub 3', 'Sub 4', 'GW', 'X', 'Y']]
+        df_t = df_t[(df_t['Action']=='shoot on target') | (df_t['Action']=='shoot off target') | (df_t['Action']=='shoot blocked') | (df_t['Action']=='goal') | (df_t['Action']=='penalty goal') | (df_t['Action']=='penalty missed')]
+        df_t = df_t.reset_index()
+        df_t = df_t.sort_values(by=['index'], ascending=False)
     except ValueError:
         st.error("Please upload the timeline file")
-    
-    df_t = df_tl[['Team','Act Name','Action', 'Min', 'Sub 1', 'Sub 2', 'Sub 3', 'Sub 4', 'GW', 'X', 'Y']]
-    df_t = df_t[(df_t['Action']=='shoot on target') | (df_t['Action']=='shoot off target') | (df_t['Action']=='shoot blocked') | (df_t['Action']=='goal') | (df_t['Action']=='penalty goal') | (df_t['Action']=='penalty missed')]
-    df_t = df_t.reset_index()
-    df_t = df_t.sort_values(by=['index'], ascending=False)
 
 
 with col2:
