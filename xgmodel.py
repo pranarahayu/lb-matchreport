@@ -17,7 +17,7 @@ import glob
 from datetime import date
 import numpy as np
 
-df = pd.read_excel('traindataxg.xlsx')
+df = pd.read_excel(st.secrets["public_gsheets_url"])
 
 #converting categorical to numerical columns
 label_encoder = preprocessing.LabelEncoder()
