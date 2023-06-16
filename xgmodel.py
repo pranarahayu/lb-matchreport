@@ -9,7 +9,14 @@ import glob
 from datetime import date
 import numpy as np
 
-df = pd.read_excel(st.secrets["public_gsheets_url"])
+@st.cache_data(ttl=600)
+def load_data(sheets_url):
+    xlsx_url = sheets_url.replace("/edit#gid=", "/export?format=xlsx&gid=")
+    return pd.read_excel(xlsx_url)
+
+df = load_data(st.secrets["public_gsheets_url"])
+
+#df = pd.read_excel(st.secrets["public_gsheets_url"])
 
 #converting categorical to numerical columns
 label_encoder = preprocessing.LabelEncoder()
