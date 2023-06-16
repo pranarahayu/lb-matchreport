@@ -1,0 +1,7 @@
+streamlit
+pandas
+mplsoccer
+matplotlib
+numpy
+scikit-learn
+statsmodels
