@@ -1,7 +1,4 @@
 import sys
-
-sys.path.append("xgmodel.py")
-
 import pandas as pd
 import numpy as np
 import streamlit as st
@@ -20,13 +17,14 @@ import statsmodels.api as sm
 import statsmodels.formula.api as smf
 from sklearn import preprocessing
 
-import xgmodel
-from xgmodel import calculate_xG
-from xgmodel import xgfix
-
 st.set_page_config(page_title='Lapangbola xG Dashboard')
 st.header('Assign xG value to shots')
 st.markdown('Created by: Prana - R&D Division Lapangbola.com')
+
+sys.path.append("xgmodel.py")
+import xgmodel
+from xgmodel import calculate_xG
+from xgmodel import xgfix
 
 col1, col2 = st.columns(2)
 
