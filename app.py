@@ -47,9 +47,10 @@ with col2:
         team1 = df_m['Team'][0]
         team2 = df_m['Opponent'][0]
         df_m2 = df_m[['Name']]
-        filter = st.selectbox('Select Team', [team1, team2])
     except ValueError:
         st.error("Please upload the excel report file")
+
+filter = st.selectbox('Select Team', [team1, team2])
 github_url = 'https://github.com/google/fonts/blob/main/ofl/poppins/Poppins-Bold.ttf'
 url = github_url + '?raw=true'
 
