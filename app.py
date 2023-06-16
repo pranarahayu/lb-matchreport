@@ -33,7 +33,7 @@ with col1:
     try:
         df_tl = pd.read_excel(tl_data, skiprows=[0])
     except ValueError:
-        st.error(‘Please upload the timeline file’)
+        st.error("Please upload the timeline file")
     
     df_t = df_tl[['Team','Act Name','Action', 'Min', 'Sub 1', 'Sub 2', 'Sub 3', 'Sub 4', 'GW', 'X', 'Y']]
     df_t = df_t[(df_t['Action']=='shoot on target') | (df_t['Action']=='shoot off target') | (df_t['Action']=='shoot blocked') | (df_t['Action']=='goal') | (df_t['Action']=='penalty goal') | (df_t['Action']=='penalty missed')]
