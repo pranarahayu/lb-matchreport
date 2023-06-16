@@ -27,11 +27,8 @@ from xgmodel import calculate_xG
 from xgmodel import xgfix
 
 with st.expander("Baca ini dulu."):
-    st.write(\"\"\"
-        Aplikasinya kelihatan error karena kedua file yang diperlukan belum diupload, upload dulu.
-        Untuk file timeline, pastikan tambahkan kolom X, Y, dan GW dulu. Format excelnya gak usah ada
-        yang diganti, ya.
-    \"\"\")
+    st.write("Aplikasinya kelihatan error karena kedua file yang diperlukan belum diupload, upload dulu./n
+    Untuk file timeline, pastikan tambahkan kolom X, Y, dan GW dulu. Format excelnya gak usah ada yang diganti, ya.")
 
 col1, col2 = st.columns(2)
 
