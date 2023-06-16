@@ -26,9 +26,8 @@ import xgmodel
 from xgmodel import calculate_xG
 from xgmodel import xgfix
 
-st.error('Upload filenya dulu!', icon="🚨")
-
 col1, col2 = st.columns(2)
+st.error('Upload filenya dulu!', icon="🚨")
 
 with col1:
     tl_data = st.file_uploader("Upload file timeline excel!")
