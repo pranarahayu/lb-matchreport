@@ -26,6 +26,8 @@ import xgmodel
 from xgmodel import calculate_xG
 from xgmodel import xgfix
 
+st.error('Upload filenya dulu!', icon="🚨")
+
 col1, col2 = st.columns(2)
 
 with col1:
