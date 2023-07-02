@@ -68,11 +68,12 @@ path_eff = [path_effects.Stroke(linewidth=2, foreground='#ffffff'),
 
 shots = df_t
 
-if (shots['Min'].dtypes == object):
-  shots['Mins'] = shots['Min'].str.split('+').str[0]
-  shots['Mins'].fillna(shots['Min'], inplace=True)
-else:
-  shots['Mins'] = shots['Min']
+#if (shots['Min'].dtypes == object):
+#  shots['Mins'] = shots['Min'].str.split('+').str[0]
+#  shots['Mins'].fillna(shots['Min'], inplace=True)
+#else:
+#  shots['Mins'] = shots['Min']
+shots['Mins'] = shots['Min']
 shots['Mins'] = shots['Mins'].astype(float)
 shots = shots[shots['X'].notna()]
 
@@ -92,7 +93,7 @@ dft = data.groupby('Action', as_index=False)
 df1 = dft.get_group('Goal')
 df2 = dft.get_group('Shot On')
 df3 = dft.get_group('Shot Off')
-#df4 = dft.get_group('Shot Blocked')
+df4 = dft.get_group('Shot Blocked')
 
 df1f = df1[['Act Name', 'Team', 'Action', 'Mins', 'Sub 1', 'Sub 3', 'X', 'Y']]
 df1f.rename(columns = {'Action':'Event', 'Sub 1':'Shot Type', 'Sub 3':'Situation', 'Act Name':'Player'}, inplace = True)
@@ -103,10 +104,10 @@ df2f.rename(columns = {'Action':'Event', 'Sub 2':'Shot Type', 'Sub 3':'Situation
 df3f = df3[['Act Name','Team', 'Action', 'Mins', 'Sub 3', 'Sub 4', 'X', 'Y']]
 df3f.rename(columns = {'Action':'Event', 'Sub 3':'Shot Type', 'Sub 4':'Situation', 'Act Name':'Player'}, inplace = True)
 
-#df4f = df4[['Act Name','Team', 'Action', 'Mins', 'Sub 2', 'Sub 3', 'X', 'Y']]
-#df4f.rename(columns = {'Action':'Event', 'Sub 2':'Shot Type', 'Sub 3':'Situation', 'Act Name':'Player'}, inplace = True)
+df4f = df4[['Act Name','Team', 'Action', 'Mins', 'Sub 2', 'Sub 3', 'X', 'Y']]
+df4f.rename(columns = {'Action':'Event', 'Sub 2':'Shot Type', 'Sub 3':'Situation', 'Act Name':'Player'}, inplace = True)
 
-sa = pd.concat([df1f, df2f, df3f])
+sa = pd.concat([df1f, df2f, df3f, df4f])
 sa = sa.dropna()
 sa.loc[(sa['Situation'].str.contains('Open play')), 'Situation'] = 'Open Play'
 sa.loc[(sa['Situation'].str.contains('Freekick')), 'Situation'] = 'Set-Piece Free Kick'
