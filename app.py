@@ -220,15 +220,18 @@ pitch = VerticalPitch(half=True, pitch_type='wyscout', corner_arcs=True,
 pitch.draw(ax=ax)
 
 df_team = fixdata[fixdata['Team'] == filter].reset_index(drop=True)
-df_player = df_players[df_players['Player'] == pilter].reset_index(drop=True)
 goal = df_team[df_team['Event']=='Goal']['Event'].count()
 son = df_team[df_team['Event']=='Shot On']['Event'].count()
 soff = df_team[df_team['Event']=='Shot Off']['Event'].count()
 sblocked = df_team[df_team['Event']=='Shot Blocked']['Event'].count()
 xgtot = round((df_team['xG'].sum()),2)
-shots = son+soff+sblocked
-xgps = round((xgtot/shots),2)
-gps = round((goal/shots),2)
+
+df_player = df_players[df_players['Player'] == pilter].reset_index(drop=True)
+goalp = df_player[df_player['Event']=='Goal']['Event'].count()
+shots = df_player[df_player['Event']!='Goal']['Event'].count()
+xgtotp = round((df_player['xG'].sum()),2)
+gps = round((goalp/shots),2)
+xgps = round((xgtotp/shots),2)
 
 if all_players:
     for i in range(len(df_team)):
@@ -313,7 +316,7 @@ else:
 
     annot_texts = ['Goals', 'xG', 'Shots', 'Conversion\nRatio', 'xG/Shots']
     annot_x = [10.83 + x*17.83 for x in range(0,5)]
-    annot_stats = [goal, xgtot, shots, gps, xgps]
+    annot_stats = [goalp, xgtotp, shots, gps, xgps]
 
     for x, s, h in zip(annot_x, annot_texts, annot_stats):
       #ax.add_patch(FancyBboxPatch((x, 62), 7, 3.5, fc='#ffffff', ec='#ffffff', lw=2))
