@@ -68,11 +68,6 @@ path_eff = [path_effects.Stroke(linewidth=2, foreground='#ffffff'),
 
 shots = df_t
 
-#if (shots['Min'].dtypes == object):
-#  shots['Mins'] = shots['Min'].str.split('+').str[0]
-#  shots['Mins'].fillna(shots['Min'], inplace=True)
-#else:
-#  shots['Mins'] = shots['Min']
 shots['Mins'] = shots['Min']
 shots['Mins'] = shots['Mins'].astype(float)
 shots = shots[shots['X'].notna()]
