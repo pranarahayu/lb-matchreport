@@ -228,7 +228,7 @@ xgtot = round((df_team['xG'].sum()),2)
 
 df_player = df_players[df_players['Player'] == pilter].reset_index(drop=True)
 goalp = df_player[df_player['Event']=='Goal']['Event'].count()
-shots = df_player[df_player['Event']!='Goal']['Event'].count()
+shots = df_player[df_player['Event']!='Goal']['Event'].count() + goalp
 xgtotp = round((df_player['xG'].sum()),2)
 gps = round((goalp/shots),2)
 xgps = round((xgtotp/shots),2)
