@@ -53,7 +53,9 @@ with col2:
     except ValueError:
         st.error("Please upload the excel report file")
 
-filter = st.selectbox('Select Team', [team1, team2])
+colx, coly = st.columns(2)
+with colx:
+    filter = st.selectbox('Select Team', [team1, team2])
 github_url = 'https://github.com/google/fonts/blob/main/ofl/poppins/Poppins-Bold.ttf'
 url = github_url + '?raw=true'
 
@@ -193,6 +195,11 @@ tempdata = tempdata.rename(columns={'Player':'Name'})
 findata = pd.merge(df_m2,tempdata,on='Name',how='left')
 findata['xG'].fillna(0, inplace=True)
 findata['xG'] = round(findata['xG'],2)
+
+with coly:
+    df_players = fixdata[fixdata['Team']==filter].reset_index(drop=True)
+    pilter = st.selectbox('Select Player', pd.unique(df_players['Player']))
+    all_players = st.checkbox('Select All Players')
 
 @st.cache
 def convert_df(df):
