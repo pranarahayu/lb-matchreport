@@ -167,7 +167,6 @@ shots.loc[(shots['situation'].str.contains('Set')), 'situation'] = 'Indirect'
 shots.loc[(shots['situation'].str.contains('Corner')), 'situation'] = 'Indirect'
 shots.loc[(shots['situation'].str.contains('Throw')), 'situation'] = 'Open Play'
 shots.loc[(shots['situation'].str.contains('Counter')), 'situation'] = 'Open Play'
-shots = shots[(shots['event']!='Shot Blocked')].reset_index() #jangan lupa dihapus nanti
 
 dfxg = shots[['distance', 'angledeg', 'body_part', 'situation', 'goal']]
 
