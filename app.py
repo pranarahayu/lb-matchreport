@@ -266,7 +266,7 @@ for x, s in zip(annot_x, annot_texts):
               zorder=9, va='center', fontproperties=bold)
 
 ax.add_patch(FancyBboxPatch((0.65, 50.5), 35, 1.35, fc='#cbfd06', ec='#cbfd06', lw=2))
-ax.annotate(text=team1, size=26, xy=(1, 52), xytext=(0,-18),
+ax.annotate(text=filter, size=26, xy=(1, 52), xytext=(0,-18),
             textcoords='offset points', color='black', ha='left',
             zorder=9, va='center', fontproperties=bold)
 
