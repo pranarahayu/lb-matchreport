@@ -230,7 +230,7 @@ df_player = df_players[df_players['Player'] == pilter].reset_index(drop=True)
 goalp = df_player[df_player['Event']=='Goal']['Event'].count()
 shots = df_player[df_player['Event']!='Goal']['Event'].count() + goalp
 xgtotp = round((df_player['xG'].sum()),2)
-gps = round((goalp/shots),2)
+gps = round((goalp/shots)*100,2)
 xgps = round((xgtotp/shots),2)
 
 if all_players:
@@ -314,7 +314,7 @@ else:
         ax.scatter(df_player['Y'][i], df_player['X'][i], s=df_player['xG'][i]*10000,
                    c='#e66009', marker='o', edgecolors='#000000', lw=3.5)
 
-    annot_texts = ['Goals', 'xG', 'Shots', 'Conversion\nRatio', 'xG/Shots']
+    annot_texts = ['Goals', 'xG', 'Shots', 'Conversion\nRatio (%)', 'xG/Shots']
     annot_x = [10.83 + x*17.83 for x in range(0,5)]
     annot_stats = [goalp, xgtotp, shots, gps, xgps]
 
