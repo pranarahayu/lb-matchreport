@@ -220,77 +220,148 @@ pitch = VerticalPitch(half=True, pitch_type='wyscout', corner_arcs=True,
 pitch.draw(ax=ax)
 
 df_team = fixdata[fixdata['Team'] == filter].reset_index(drop=True)
+df_player = df_players[df_players['Player'] == pilter].reset_index(drop=True)
 goal = df_team[df_team['Event']=='Goal']['Event'].count()
 son = df_team[df_team['Event']=='Shot On']['Event'].count()
 soff = df_team[df_team['Event']=='Shot Off']['Event'].count()
 sblocked = df_team[df_team['Event']=='Shot Blocked']['Event'].count()
 xgtot = round((df_team['xG'].sum()),2)
+shots = son+soff+sblocked
+xgps = round((xgtot/shots),2)
+gps = round((goal/shots),2)
 
-for i in range(len(df_team)):
-  if (df_team['Event'][i] == 'Goal' or df_team['Event'][i] == 'Penalty Goal'):
-    ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
-               c='#7ed957', marker='o', edgecolors='#000000', lw=3.5)
-  elif (df_team['Event'][i] == 'Shot On'):
-    ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
-               c='#f2ff00', marker='o', edgecolors='#000000', lw=3.5)
-  elif (df_team['Event'][i] == 'Shot Off'):
-    ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
-               c='#a6a6a6', marker='o', edgecolors='#000000', lw=3.5)
-  else:
-    ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
-               c='#e66009', marker='o', edgecolors='#000000', lw=3.5)
+if all_players:
+    for i in range(len(df_team)):
+      if (df_team['Event'][i] == 'Goal' or df_team['Event'][i] == 'Penalty Goal'):
+        ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
+                   c='#7ed957', marker='o', edgecolors='#000000', lw=3.5)
+      elif (df_team['Event'][i] == 'Shot On'):
+        ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
+                   c='#f2ff00', marker='o', edgecolors='#000000', lw=3.5)
+      elif (df_team['Event'][i] == 'Shot Off'):
+        ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
+                   c='#a6a6a6', marker='o', edgecolors='#000000', lw=3.5)
+      else:
+        ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
+                   c='#e66009', marker='o', edgecolors='#000000', lw=3.5)
 
-annot_texts = ['Goals', 'Shots\nOn Target', 'Shots\nOff Target', 'Shots\nBlocked', 'xG Total']
-annot_x = [10.83 + x*17.83 for x in range(0,5)]
-annot_stats = [goal, son, soff, sblocked, xgtot]
+    annot_texts = ['Goals', 'Shots\nOn Target', 'Shots\nOff Target', 'Shots\nBlocked', 'xG Total']
+    annot_x = [10.83 + x*17.83 for x in range(0,5)]
+    annot_stats = [goal, son, soff, sblocked, xgtot]
 
-for x, s, h in zip(annot_x, annot_texts, annot_stats):
-  #ax.add_patch(FancyBboxPatch((x, 62), 7, 3.5, fc='#ffffff', ec='#ffffff', lw=2))
-  ax.annotate(text=s, size=22, xy=(x+3.5, 56.5), xytext=(0,-18),
-              textcoords='offset points', color='black', ha='center',
-              zorder=9, va='center', fontproperties=bold, path_effects=path_eff)
-  ax.annotate(text=h, size=78, xy=(x+3.5, 60), xytext=(0,-18),
-              textcoords='offset points', color='black', ha='center',
-              zorder=9, va='center', fontproperties=bold, path_effects=path_eff)
+    for x, s, h in zip(annot_x, annot_texts, annot_stats):
+      #ax.add_patch(FancyBboxPatch((x, 62), 7, 3.5, fc='#ffffff', ec='#ffffff', lw=2))
+      ax.annotate(text=s, size=22, xy=(x+3.5, 56.5), xytext=(0,-18),
+                  textcoords='offset points', color='black', ha='center',
+                  zorder=9, va='center', fontproperties=bold, path_effects=path_eff)
+      ax.annotate(text=h, size=78, xy=(x+3.5, 60), xytext=(0,-18),
+                  textcoords='offset points', color='black', ha='center',
+                  zorder=9, va='center', fontproperties=bold, path_effects=path_eff)
 
-ax.add_patch(FancyBboxPatch((0, 45), 200, 4.5, fc='#ffffff', ec='#ffffff', lw=2))
+    ax.add_patch(FancyBboxPatch((0, 45), 200, 4.5, fc='#ffffff', ec='#ffffff', lw=2))
 
-annot_x = [4 + x*25 for x in range(0,4)]
-annot_texts = ['Goals', 'Shots On Target', 'Shots Off Target', 'Shots Blocked']
+    annot_x = [4 + x*25 for x in range(0,4)]
+    annot_texts = ['Goals', 'Shots On Target', 'Shots Off Target', 'Shots Blocked']
 
-ax.scatter(4, 48, s=800, c='#7ed957', lw=3.5,
-           marker='o', edgecolors='#000000')
-ax.scatter(29, 48, s=800, c='#f2ff00', lw=3.5,
-           marker='o', edgecolors='#000000')
-ax.scatter(54, 48, s=800, c='#a6a6a6', lw=3.5,
-           marker='o', edgecolors='#000000')
-ax.scatter(79, 48, s=800, c='#e66009', lw=3.5,
-           marker='o', edgecolors='#000000')
+    ax.scatter(4, 48, s=800, c='#7ed957', lw=3.5,
+               marker='o', edgecolors='#000000')
+    ax.scatter(29, 48, s=800, c='#f2ff00', lw=3.5,
+               marker='o', edgecolors='#000000')
+    ax.scatter(54, 48, s=800, c='#a6a6a6', lw=3.5,
+               marker='o', edgecolors='#000000')
+    ax.scatter(79, 48, s=800, c='#e66009', lw=3.5,
+               marker='o', edgecolors='#000000')
 
-for x, s in zip(annot_x, annot_texts):
-  ax.annotate(text=s, size=24, xy=(x+2.5, 49), xytext=(0,-18),
-              textcoords='offset points', color='black', ha='left',
-              zorder=9, va='center', fontproperties=bold)
+    for x, s in zip(annot_x, annot_texts):
+      ax.annotate(text=s, size=24, xy=(x+2.5, 49), xytext=(0,-18),
+                  textcoords='offset points', color='black', ha='left',
+                  zorder=9, va='center', fontproperties=bold)
 
-ax.add_patch(FancyBboxPatch((0.65, 50.5), 35, 1.35, fc='#cbfd06', ec='#cbfd06', lw=2))
-ax.annotate(text=filter, size=26, xy=(1, 52), xytext=(0,-18),
-            textcoords='offset points', color='black', ha='left',
-            zorder=9, va='center', fontproperties=bold)
+    ax.add_patch(FancyBboxPatch((0.65, 50.5), 35, 1.35, fc='#cbfd06', ec='#cbfd06', lw=2))
+    ax.annotate(text=filter, size=26, xy=(1, 52), xytext=(0,-18),
+                textcoords='offset points', color='black', ha='left',
+                zorder=9, va='center', fontproperties=bold)
 
-ax.annotate(text='-Nilai xG->', size=21, xy=(87, 54), xytext=(0,-18),
-            textcoords='offset points', color='black', ha='left',
-            zorder=9, va='center', fontproperties=bold, path_effects=path_eff)
-ax.scatter(87.5, 51.15, s=300, c='#a6a6a6', lw=2,
-           marker='o', edgecolors='#000000')
-ax.scatter(90.5, 51.25, s=500, c='#a6a6a6', lw=2,
-           marker='o', edgecolors='#000000')
-ax.scatter(93.5, 51.35, s=700, c='#a6a6a6', lw=2,
-           marker='o', edgecolors='#000000')
-ax.scatter(97, 51.45, s=900, c='#a6a6a6', lw=2,
-           marker='o', edgecolors='#000000')
-fig.savefig('smap.jpg', dpi=500, bbox_inches='tight')
-st.pyplot(fig)
+    ax.annotate(text='-Nilai xG->', size=21, xy=(87, 54), xytext=(0,-18),
+                textcoords='offset points', color='black', ha='left',
+                zorder=9, va='center', fontproperties=bold, path_effects=path_eff)
+    ax.scatter(87.5, 51.15, s=300, c='#a6a6a6', lw=2,
+               marker='o', edgecolors='#000000')
+    ax.scatter(90.5, 51.25, s=500, c='#a6a6a6', lw=2,
+               marker='o', edgecolors='#000000')
+    ax.scatter(93.5, 51.35, s=700, c='#a6a6a6', lw=2,
+               marker='o', edgecolors='#000000')
+    ax.scatter(97, 51.45, s=900, c='#a6a6a6', lw=2,
+               marker='o', edgecolors='#000000')
+    fig.savefig('smap.jpg', dpi=500, bbox_inches='tight')
+    st.pyplot(fig)
+    
+else:
+    for i in range(len(df_player)):
+      if (df_player['Event'][i] == 'Goal' or df_player['Event'][i] == 'Penalty Goal'):
+        ax.scatter(df_player['Y'][i], df_player['X'][i], s=df_player['xG'][i]*10000,
+                   c='#7ed957', marker='o', edgecolors='#000000', lw=3.5)
+      elif (df_player['Event'][i] == 'Shot On'):
+        ax.scatter(df_player['Y'][i], df_player['X'][i], s=df_player['xG'][i]*10000,
+                   c='#f2ff00', marker='o', edgecolors='#000000', lw=3.5)
+      elif (df_player['Event'][i] == 'Shot Off'):
+        ax.scatter(df_player['Y'][i], df_player['X'][i], s=df_player['xG'][i]*10000,
+                   c='#a6a6a6', marker='o', edgecolors='#000000', lw=3.5)
+      else:
+        ax.scatter(df_player['Y'][i], df_player['X'][i], s=df_player['xG'][i]*10000,
+                   c='#e66009', marker='o', edgecolors='#000000', lw=3.5)
 
+    annot_texts = ['Goals', 'xG', 'Shots', 'Conversion\nRatio', 'xG/Shots']
+    annot_x = [10.83 + x*17.83 for x in range(0,5)]
+    annot_stats = [goal, xgtot, shots, gps, xgps]
+
+    for x, s, h in zip(annot_x, annot_texts, annot_stats):
+      #ax.add_patch(FancyBboxPatch((x, 62), 7, 3.5, fc='#ffffff', ec='#ffffff', lw=2))
+      ax.annotate(text=s, size=22, xy=(x+3.5, 56.5), xytext=(0,-18),
+                  textcoords='offset points', color='black', ha='center',
+                  zorder=9, va='center', fontproperties=bold, path_effects=path_eff)
+      ax.annotate(text=h, size=78, xy=(x+3.5, 60), xytext=(0,-18),
+                  textcoords='offset points', color='black', ha='center',
+                  zorder=9, va='center', fontproperties=bold, path_effects=path_eff)
+
+    ax.add_patch(FancyBboxPatch((0, 45), 200, 4.5, fc='#ffffff', ec='#ffffff', lw=2))
+
+    annot_x = [4 + x*25 for x in range(0,4)]
+    annot_texts = ['Goals', 'Shots On Target', 'Shots Off Target', 'Shots Blocked']
+
+    ax.scatter(4, 48, s=800, c='#7ed957', lw=3.5,
+               marker='o', edgecolors='#000000')
+    ax.scatter(29, 48, s=800, c='#f2ff00', lw=3.5,
+               marker='o', edgecolors='#000000')
+    ax.scatter(54, 48, s=800, c='#a6a6a6', lw=3.5,
+               marker='o', edgecolors='#000000')
+    ax.scatter(79, 48, s=800, c='#e66009', lw=3.5,
+               marker='o', edgecolors='#000000')
+
+    for x, s in zip(annot_x, annot_texts):
+      ax.annotate(text=s, size=24, xy=(x+2.5, 49), xytext=(0,-18),
+                  textcoords='offset points', color='black', ha='left',
+                  zorder=9, va='center', fontproperties=bold)
+
+    ax.add_patch(FancyBboxPatch((0.65, 50.5), 35, 1.35, fc='#cbfd06', ec='#cbfd06', lw=2))
+    ax.annotate(text=filter, size=26, xy=(1, 52), xytext=(0,-18),
+                textcoords='offset points', color='black', ha='left',
+                zorder=9, va='center', fontproperties=bold)
+
+    ax.annotate(text='-Nilai xG->', size=21, xy=(87, 54), xytext=(0,-18),
+                textcoords='offset points', color='black', ha='left',
+                zorder=9, va='center', fontproperties=bold, path_effects=path_eff)
+    ax.scatter(87.5, 51.15, s=300, c='#a6a6a6', lw=2,
+               marker='o', edgecolors='#000000')
+    ax.scatter(90.5, 51.25, s=500, c='#a6a6a6', lw=2,
+               marker='o', edgecolors='#000000')
+    ax.scatter(93.5, 51.35, s=700, c='#a6a6a6', lw=2,
+               marker='o', edgecolors='#000000')
+    ax.scatter(97, 51.45, s=900, c='#a6a6a6', lw=2,
+               marker='o', edgecolors='#000000')
+    fig.savefig('smap.jpg', dpi=500, bbox_inches='tight')
+    st.pyplot(fig)
+    
 with open('smap.jpg', 'rb') as img:
           fn = 'AttemptsMap_'+filter+'.jpg'
           btn = st.download_button(label="Download Attempts Map!", data=img,
