@@ -90,7 +90,7 @@ dft = data.groupby('Action', as_index=False)
 df1 = dft.get_group('Goal')
 df2 = dft.get_group('Shot On')
 df3 = dft.get_group('Shot Off')
-df4 = dft.get_group('Shot Blocked')
+#df4 = dft.get_group('Shot Blocked')
 
 df1f = df1[['Act Name', 'Team', 'Action', 'Mins', 'Sub 1', 'Sub 3', 'X', 'Y']]
 df1f.rename(columns = {'Action':'Event', 'Sub 1':'Shot Type', 'Sub 3':'Situation', 'Act Name':'Player'}, inplace = True)
@@ -101,10 +101,11 @@ df2f.rename(columns = {'Action':'Event', 'Sub 2':'Shot Type', 'Sub 3':'Situation
 df3f = df3[['Act Name','Team', 'Action', 'Mins', 'Sub 3', 'Sub 4', 'X', 'Y']]
 df3f.rename(columns = {'Action':'Event', 'Sub 3':'Shot Type', 'Sub 4':'Situation', 'Act Name':'Player'}, inplace = True)
 
-df4f = df4[['Act Name','Team', 'Action', 'Mins', 'Sub 2', 'Sub 3', 'X', 'Y']]
-df4f.rename(columns = {'Action':'Event', 'Sub 2':'Shot Type', 'Sub 3':'Situation', 'Act Name':'Player'}, inplace = True)
+#df4f = df4[['Act Name','Team', 'Action', 'Mins', 'Sub 2', 'Sub 3', 'X', 'Y']]
+#df4f.rename(columns = {'Action':'Event', 'Sub 2':'Shot Type', 'Sub 3':'Situation', 'Act Name':'Player'}, inplace = True)
 
-sa = pd.concat([df1f, df2f, df3f, df4f])
+#sa = pd.concat([df1f, df2f, df3f, df4f])
+sa = pd.concat([df1f, df2f, df3f])
 sa = sa.dropna()
 sa.loc[(sa['Situation'].str.contains('Open play')), 'Situation'] = 'Open Play'
 sa.loc[(sa['Situation'].str.contains('Freekick')), 'Situation'] = 'Set-Piece Free Kick'
@@ -169,7 +170,7 @@ shots.loc[(shots['situation'].str.contains('Set')), 'situation'] = 'Indirect'
 shots.loc[(shots['situation'].str.contains('Corner')), 'situation'] = 'Indirect'
 shots.loc[(shots['situation'].str.contains('Throw')), 'situation'] = 'Open Play'
 shots.loc[(shots['situation'].str.contains('Counter')), 'situation'] = 'Open Play'
-
+shots = shots[(shots['event']!='Shot Blocked')].reset_index() #jangan lupa dihapus nanti
 dfxg = shots[['distance', 'angledeg', 'body_part', 'situation', 'goal']]
 
 label_encoder = preprocessing.LabelEncoder()
