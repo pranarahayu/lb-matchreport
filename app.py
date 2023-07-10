@@ -87,13 +87,13 @@ data['Action'] = data['Action'].replace(['shoot on target','shoot off target','s
                                         ['Shot On','Shot Off','Shot Blocked','Goal','Shot On','Goal'])
 
 dft = data.groupby('Action', as_index=False)
-#df1 = dft.get_group('Goal')
+df1 = dft.get_group('Goal')
 df2 = dft.get_group('Shot On')
 df3 = dft.get_group('Shot Off')
 df4 = dft.get_group('Shot Blocked')
 
-#df1f = df1[['Act Name', 'Team', 'Action', 'Mins', 'Sub 1', 'Sub 3', 'X', 'Y']]
-#df1f.rename(columns = {'Action':'Event', 'Sub 1':'Shot Type', 'Sub 3':'Situation', 'Act Name':'Player'}, inplace = True)
+df1f = df1[['Act Name', 'Team', 'Action', 'Mins', 'Sub 1', 'Sub 3', 'X', 'Y']]
+df1f.rename(columns = {'Action':'Event', 'Sub 1':'Shot Type', 'Sub 3':'Situation', 'Act Name':'Player'}, inplace = True)
 
 df2f = df2[['Act Name','Team', 'Action', 'Mins', 'Sub 2', 'Sub 3', 'X', 'Y']]
 df2f.rename(columns = {'Action':'Event', 'Sub 2':'Shot Type', 'Sub 3':'Situation', 'Act Name':'Player'}, inplace = True)
@@ -104,8 +104,8 @@ df3f.rename(columns = {'Action':'Event', 'Sub 3':'Shot Type', 'Sub 4':'Situation
 df4f = df4[['Act Name','Team', 'Action', 'Mins', 'Sub 2', 'Sub 3', 'X', 'Y']]
 df4f.rename(columns = {'Action':'Event', 'Sub 2':'Shot Type', 'Sub 3':'Situation', 'Act Name':'Player'}, inplace = True)
 
-#sa = pd.concat([df1f, df2f, df3f, df4f])
-sa = pd.concat([df2f, df3f, df4f])
+sa = pd.concat([df1f, df2f, df3f, df4f])
+#sa = pd.concat([df2f, df3f, df4f])
 sa = sa.dropna()
 sa.loc[(sa['Situation'].str.contains('Open play')), 'Situation'] = 'Open Play'
 sa.loc[(sa['Situation'].str.contains('Freekick')), 'Situation'] = 'Set-Piece Free Kick'
