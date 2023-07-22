@@ -226,7 +226,7 @@ st.download_button(label='Download Data Excel+xG!',
                    file_name='Player+xG_'+team1+'vs'+team2+'.csv',
                    mime='text/csv')
 
-fixdata.loc[(fixdata['X'].str.contains('90') & fixdata['Y'].str.contains('50')), 'Action'] = 'Shot Off'
+fixdata.loc[0, 'Action'] = 'Shot Off'
 
 #Attempts Map
 fig, ax = plt.subplots(figsize=(20, 20), dpi=500)
