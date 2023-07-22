@@ -234,6 +234,11 @@ pitch = VerticalPitch(half=True, pitch_type='wyscout', corner_arcs=True,
                       pad_right=0.5, pad_left=0.5, stripe=True, linewidth=3.5)
 pitch.draw(ax=ax)
 
+#ARGH
+for i in range(len(fixdata)):
+    if (fixdata['Action'][i] == 'Shot On') & ((fixdata['X'][i] == 90) & (fixdata['Y'][i] == 50)):
+        fixdata['Action'][i] = 'Shot Off'
+
 df_team = fixdata[fixdata['Team'] == filter].reset_index(drop=True)
 goal = df_team[df_team['Event']=='Goal']['Event'].count()
 son = df_team[df_team['Event']=='Shot On']['Event'].count()
