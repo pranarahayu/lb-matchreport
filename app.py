@@ -86,7 +86,7 @@ data.loc[(data['Action'].str.contains('penalty')), 'Y'] = 50
 #data.loc[(data['Action'].str.contains('penalty missed')) & ((data['Sub 1'].str.contains('Woodwork')) | (data['Sub 1'].str.contains('High')) | (data['Sub 1'].str.contains('Wide'))), 'Action'] = 'shoot off target'
 
 data['Action'] = data['Action'].replace(['shoot on target','shoot off target','shoot blocked','goal','penalty goal','penalty missed'],
-                                        ['Shot On','Shot Off','Shot Blocked','Goal','Goal','Shot Off'])
+                                        ['Shot On','Shot Off','Shot Blocked','Goal','Goal','Shot On'])
 dft = data.groupby('Action', as_index=False)
 temp = pd.DataFrame(columns = ['Player', 'Team','Event','Mins',
                                  'Shot Type','Situation','X','Y'])
