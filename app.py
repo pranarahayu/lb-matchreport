@@ -83,6 +83,7 @@ data.loc[(data['Action'].str.contains('penalty missed')), 'Sub 2'] = 'Right Foot
 data.loc[(data['Action'].str.contains('penalty')), 'X'] = 90
 data.loc[(data['Action'].str.contains('penalty')), 'Y'] = 50
 data.loc[(data['Action'].str.contains('penalty missed')) & ((data['Sub 1'].str.contains('Saved')) | (data['Sub 1'].str.contains('Cleared'))), 'Action'] = 'shoot on target'
+data.loc[(data['Action'].str.contains('penalty missed')) & ((data['Sub 1'].str.contains('Woodwork')) | (data['Sub 1'].str.contains('High') | (data['Sub 1'].str.contains('Wide'))), 'Action'] = 'shoot on target'
 
 data['Action'] = data['Action'].replace(['shoot on target','shoot off target','shoot blocked','goal','penalty goal','penalty missed'],
                                         ['Shot On','Shot Off','Shot Blocked','Goal','Goal','Shot Off'])
