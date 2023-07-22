@@ -226,8 +226,6 @@ st.download_button(label='Download Data Excel+xG!',
                    file_name='Player+xG_'+team1+'vs'+team2+'.csv',
                    mime='text/csv')
 
-data.loc[29, 'Event'] = 'Shot Off'
-
 #Attempts Map
 fig, ax = plt.subplots(figsize=(20, 20), dpi=500)
 pitch = VerticalPitch(half=True, pitch_type='wyscout', corner_arcs=True,
