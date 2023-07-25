@@ -122,7 +122,6 @@ else:
   df4f = temp.copy()
 
 sa = pd.concat([df1f, df2f, df3f, df4f])
-#sa = pd.concat([df2f, df3f, df4f])
 sa = sa.dropna()
 sa.loc[(sa['Situation'].str.contains('Open play')), 'Situation'] = 'Open Play'
 sa.loc[(sa['Situation'].str.contains('Freekick')), 'Situation'] = 'Set-Piece Free Kick'
@@ -187,7 +186,6 @@ shots.loc[(shots['situation'].str.contains('Set')), 'situation'] = 'Indirect'
 shots.loc[(shots['situation'].str.contains('Corner')), 'situation'] = 'Indirect'
 shots.loc[(shots['situation'].str.contains('Throw')), 'situation'] = 'Open Play'
 shots.loc[(shots['situation'].str.contains('Counter')), 'situation'] = 'Open Play'
-#shots = shots[(shots['event']!='Shot Blocked')].reset_index() #jangan lupa dihapus nanti
 dfxg = shots[['distance', 'angledeg', 'body_part', 'situation', 'goal']]
 
 label_encoder = preprocessing.LabelEncoder()
