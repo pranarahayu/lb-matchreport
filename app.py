@@ -85,7 +85,7 @@ data.loc[(data['Action'].str.contains('penalty')), 'Y'] = 50
 data.loc[(data['Action'].str.contains('penalty missed')) & ((data['Sub 1'].str.contains('Saved')) | (data['Sub 1'].str.contains('Cleared'))), 'Action'] = 'shoot on target'
 
 data['Action'] = data['Action'].replace(['shoot on target','shoot off target','shoot blocked','goal','penalty goal','penalty missed'],
-                                        ['Shot On','Shot Off','Shot Blocked','Goal','Goal','Shot On'])
+                                        ['Shot On','Shot Off','Shot Blocked','Goal','Goal','Shot Off'])
 dft = data.groupby('Action', as_index=False)
 temp = pd.DataFrame(columns = ['Player', 'Team','Event','Mins',
                                'Shot Type','Situation','X','Y'])
@@ -228,7 +228,12 @@ st.download_button(label='Download Data Excel+xG!',
                    data=csv,
                    file_name='Player+xG_'+team1+'vs'+team2+'.csv',
                    mime='text/csv')
-st.write(df3f)
+
+disp = fixdata[fixdata['Team']==filter]
+if all_players:
+    st.write(disp)
+else:
+    st.write(disp[disp['Player']==pilter])
 
 #Attempts Map
 fig, ax = plt.subplots(figsize=(20, 20), dpi=500)
