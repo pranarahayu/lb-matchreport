@@ -228,7 +228,7 @@ st.download_button(label='Download Data Excel+xG!',
                    data=csv,
                    file_name='Player+xG_'+team1+'vs'+team2+'.csv',
                    mime='text/csv')
-st.write(fixdata)
+st.write(df3f)
 
 #Attempts Map
 fig, ax = plt.subplots(figsize=(20, 20), dpi=500)
