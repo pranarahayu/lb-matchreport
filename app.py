@@ -82,14 +82,13 @@ data.loc[(data['Action'].str.contains('penalty missed')), 'Sub 3'] = 'Penalty'
 data.loc[(data['Action'].str.contains('penalty missed')), 'Sub 2'] = 'Right Foot'
 data.loc[(data['Action'].str.contains('penalty')), 'X'] = 90
 data.loc[(data['Action'].str.contains('penalty')), 'Y'] = 50
-#data.loc[(data['Action'].str.contains('penalty missed')) & ((data['Sub 1'].str.contains('Saved')) | (data['Sub 1'].str.contains('Cleared'))), 'Action'] = 'shoot on target'
-#data.loc[(data['Action'].str.contains('penalty missed')) & ((data['Sub 1'].str.contains('Woodwork')) | (data['Sub 1'].str.contains('High')) | (data['Sub 1'].str.contains('Wide'))), 'Action'] = 'shoot off target'
+data.loc[(data['Action'].str.contains('penalty missed')) & ((data['Sub 1'].str.contains('Saved')) | (data['Sub 1'].str.contains('Cleared'))), 'Action'] = 'shoot on target'
 
 data['Action'] = data['Action'].replace(['shoot on target','shoot off target','shoot blocked','goal','penalty goal','penalty missed'],
                                         ['Shot On','Shot Off','Shot Blocked','Goal','Goal','Shot On'])
 dft = data.groupby('Action', as_index=False)
 temp = pd.DataFrame(columns = ['Player', 'Team','Event','Mins',
-                                 'Shot Type','Situation','X','Y'])
+                               'Shot Type','Situation','X','Y'])
 if (('Goal' in data['Action'].unique()) == True):
   df1 = dft.get_group('Goal')
   df1f = df1[['Act Name', 'Team', 'Action', 'Mins', 'Sub 1', 'Sub 3', 'X', 'Y']]
@@ -106,8 +105,12 @@ else:
 
 if (('Shot Off' in data['Action'].unique()) == True):
   df3 = dft.get_group('Shot Off')
-  df3f = df3[['Act Name','Team', 'Action', 'Mins', 'Sub 3', 'Sub 4', 'X', 'Y']]
-  df3f.rename(columns = {'Action':'Event', 'Sub 3':'Shot Type', 'Sub 4':'Situation', 'Act Name':'Player'}, inplace = True)
+  if (('Penalty' in df3['Sub 3'].unique()) == True):
+    df3f = df3[['Act Name','Team', 'Action', 'Mins', 'Sub 2', 'Sub 3', 'X', 'Y']]
+    df3f.rename(columns = {'Action':'Event', 'Sub 2':'Shot Type', 'Sub 3':'Situation', 'Act Name':'Player'}, inplace = True)
+  else:
+    df3f = df3[['Act Name','Team', 'Action', 'Mins', 'Sub 3', 'Sub 4', 'X', 'Y']]
+    df3f.rename(columns = {'Action':'Event', 'Sub 3':'Shot Type', 'Sub 4':'Situation', 'Act Name':'Player'}, inplace = True)
 else:
   df3f = temp.copy()
 
