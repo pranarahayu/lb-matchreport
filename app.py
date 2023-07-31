@@ -413,7 +413,7 @@ with coln:
         fig.savefig('smap.jpg', dpi=500, bbox_inches='tight')
         st.pyplot(fig)
     
-        with open('smap.jpg', 'rb') as img:
-                  fn = 'AttemptsMap_'+filter+'.jpg'
-                  btn = st.download_button(label="Download Attempts Map!", data=img,
-                                           file_name=fn, mime="image/jpg")
+    with open('smap.jpg', 'rb') as img:
+        fn = 'AttemptsMap_'+filter+'.jpg'
+        btn = st.download_button(label="Download Attempts Map!", data=img,
+                                 file_name=fn, mime="image/jpg")
