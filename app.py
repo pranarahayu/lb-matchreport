@@ -17,7 +17,7 @@ import statsmodels.api as sm
 import statsmodels.formula.api as smf
 from sklearn import preprocessing
 
-st.set_page_config(page_title='Lapangbola xG Dashboard')
+st.set_page_config(page_title='Lapangbola xG Dashboard', layout='wide')
 st.header('Assign xG value to shots')
 st.markdown('Created by: Prana - R&D Division Lapangbola.com')
 
