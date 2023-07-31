@@ -166,7 +166,7 @@ shotdata = df_co[['Player','Team','Event','Mins','Shot Type','Situation','X3','Y
 ########
 shots = shotdata.dropna()
 shots.rename(columns = {'Player':'player', 'Event':'event', 'Mins':'mins', 'Shot Type':'shottype',
-                        'Situation':'situation','X3':'X','Y3':'Y', 'Distance':'distance',
+                        'Situation':'situation','X3':'X','Y3':'Y','Distance':'distance',
                         'Angle Rad':'anglerad','Angle Degrees':'angledeg'}, inplace = True)
 
 body_part_list=[]
