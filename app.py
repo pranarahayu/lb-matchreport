@@ -30,7 +30,6 @@ with st.expander("BACA INI DULU."):
     st.write("Aplikasinya kelihatan error karena kedua file yang diperlukan belum diupload, upload dulu. Untuk file timeline, pastikan tambahkan kolom X, Y, dan GW dulu. Format excelnya gak usah ada yang diganti, ya. Untuk file report excelnya, langsung upload aja, gak ada yang perlu diubah.")
 
 col1, col2 = st.columns(2)
-st.cache_data
 with col1:
     tl_data = st.file_uploader("Upload file timeline excel!")
     try:
@@ -42,7 +41,6 @@ with col1:
     except ValueError:
         st.error("Please upload the timeline file")
 
-st.cache_data
 with col2:
     m_data = st.file_uploader("Upload file report excel!")
     try:
@@ -217,7 +215,7 @@ with coly:
     pilter = st.selectbox('Select Player', pd.unique(df_players['Player']))
     all_players = st.checkbox('Select All Players')
 
-@st.cache
+@st.cache_data
 def convert_df(df):
     return df.to_csv().encode('utf-8')
 csv = convert_df(findata)
