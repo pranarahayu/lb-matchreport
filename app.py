@@ -20,6 +20,7 @@ from sklearn import preprocessing
 st.set_page_config(page_title='Lapangbola xG Dashboard')
 st.header('Assign xG value to shots')
 st.markdown('Created by: Prana - R&D Division Lapangbola.com')
+st.cache_data
 
 sys.path.append("xgmodel.py")
 import xgmodel
