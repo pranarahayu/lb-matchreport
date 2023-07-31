@@ -20,7 +20,6 @@ from sklearn import preprocessing
 st.set_page_config(page_title='Lapangbola xG Dashboard')
 st.header('Assign xG value to shots')
 st.markdown('Created by: Prana - R&D Division Lapangbola.com')
-st.cache_data
 
 sys.path.append("xgmodel.py")
 import xgmodel
@@ -31,7 +30,7 @@ with st.expander("BACA INI DULU."):
     st.write("Aplikasinya kelihatan error karena kedua file yang diperlukan belum diupload, upload dulu. Untuk file timeline, pastikan tambahkan kolom X, Y, dan GW dulu. Format excelnya gak usah ada yang diganti, ya. Untuk file report excelnya, langsung upload aja, gak ada yang perlu diubah.")
 
 col1, col2 = st.columns(2)
-
+st.cache_data
 with col1:
     tl_data = st.file_uploader("Upload file timeline excel!")
     try:
@@ -43,7 +42,7 @@ with col1:
     except ValueError:
         st.error("Please upload the timeline file")
 
-
+st.cache_data
 with col2:
     m_data = st.file_uploader("Upload file report excel!")
     try:
