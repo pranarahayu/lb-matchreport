@@ -134,6 +134,8 @@ df_co['c'] = abs(df_co['Y']-50)
 
 x=df_co['x']*1.05
 y=df_co['c']*0.68
+x = np.array(x, dtype=int)
+y = np.array(y, dtype=int)
 
 df_co['X3']=(100-df_co['X'])*1.05
 df_co['Y3']=df_co['Y']*0.68
