@@ -285,24 +285,24 @@ with tab1:
 
 with tab2:
     tab2.subheader('Generate Passing Network')
-    col1, col2 = st.columns(2)
-    with col1:
+    col7, col8 = st.columns(2)
+    with col7:
         tl_data = st.file_uploader("Upload file timeline excel!")
         tl = pd.read_excel(tl_data, skiprows=[0])
 
-    with col2:
+    with col8:
         rp_data = st.file_uploader("Upload file report excel!")
         rp = pd.read_excel(rp_data, skiprows=[0])
         team1 = df_m['Team'][0]
         team2 = df_m['Opponent'][0]
         match = team1 +' vs '+team2
             
-    colx, coly, colz = st.columns(3)
-    with colx:
+    colp, colq, colr = st.columns(3)
+    with colp:
         filter = st.selectbox('Select Team', [team1, team2])
-    with coly:
+    with colq:
         min_pass = st.number_input('Select Min. Successful Passes', min_value=0, max_value=3, step=1)
-    with colz:
+    with colr:
         menit = st.slider('Select Minutes', 0, 90, (1, 30))
         
     plotdata = get_PNdata(tl, rp, menit[0], menit[1], filter, min_pass)
