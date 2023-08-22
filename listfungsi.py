@@ -317,5 +317,4 @@ def get_PNdata(tl, rp, min_min, max_min, team, min_pass):
   ax.text(100, -4, match.upper(), ha='right', fontproperties=reg, color='#FFFFFF', size='18', va='center')
   
   plt.savefig('/app/lb-matchreport/data/pnet.jpg', dpi=500, bbox_inches='tight')
-  
   return fig
