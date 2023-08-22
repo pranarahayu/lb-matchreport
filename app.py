@@ -36,14 +36,14 @@ with tab1:
     tab1.subheader('Generate Shot Map')
     col1, col2 = st.columns(2)
     with col1:
-        tl_data = st.file_uploader("Upload file timeline excel!")
+        tl_data = st.file_uploader("Upload file timeline excel!", key=0)
         try:
             df_t = pd.read_excel(tl_data, skiprows=[0])
         except ValueError:
             st.error("Please upload the timeline file")
 
     with col2:
-        m_data = st.file_uploader("Upload file report excel!")
+        m_data = st.file_uploader("Upload file report excel!", key=3)
         try:
             df_m = pd.read_excel(m_data, skiprows=[0])
             team1 = df_m['Team'][0]
