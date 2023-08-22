@@ -287,11 +287,11 @@ with tab2:
     tab2.subheader('Generate Passing Network')
     col7, col8 = st.columns(2)
     with col7:
-        tl_data = st.file_uploader("Upload file timeline excel!")
+        tl_data = st.file_uploader("Upload file timeline excel!", key=1)
         tl = pd.read_excel(tl_data, skiprows=[0])
 
     with col8:
-        rp_data = st.file_uploader("Upload file report excel!")
+        rp_data = st.file_uploader("Upload file report excel!", key=2)
         rp = pd.read_excel(rp_data, skiprows=[0])
         team1 = df_m['Team'][0]
         team2 = df_m['Opponent'][0]
