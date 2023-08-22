@@ -266,7 +266,7 @@ def get_PNdata(tl, rp, min_min, max_min, team, min_pass):
 
   return pass_between, defmin
   
- def plot_PN(data, min_pass, team, min_min, max_min, match):
+def plot_PN(data, min_pass, team, min_min, max_min, match):
   pass_between = data.copy()
   fig, ax = plt.subplots(figsize=(20, 20), dpi=500)
   fig.patch.set_facecolor('#062d2d')
