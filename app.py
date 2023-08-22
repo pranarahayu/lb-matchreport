@@ -21,11 +21,6 @@ st.set_page_config(page_title='Lapangbola xG Dashboard', layout='wide')
 st.header('Assign xG value to shots')
 st.markdown('Created by: Prana - R&D Division Lapangbola.com')
 
-sys.path.append("xgmodel.py")
-import xgmodel
-from xgmodel import calculate_xG
-from xgmodel import xgfix
-
 sys.path.append("listfungsi.py")
 import listfungsi
 from listfungsi import assign_xg
@@ -72,7 +67,7 @@ with tab1:
     path_eff = [path_effects.Stroke(linewidth=2, foreground='#ffffff'),
                 path_effects.Normal()]
 
-    fixdata = assignxg(df_t)
+    fixdata = assign_xg(df_t)
 
     tempdata = fixdata[['Player', 'Team', 'xG']]
     tempdata = tempdata.groupby(['Player', 'Team'], as_index=False).sum()
