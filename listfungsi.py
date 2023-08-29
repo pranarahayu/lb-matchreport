@@ -16,7 +16,7 @@ def assign_xg(data):
   df_match = data.copy()
 
   #Filtering Data
-  df_match = df_match[['Team','Act Name','Action', 'Min', 'Sub 1', 'Sub 2', 'Sub 3', 'Sub 4', 'GW', 'X', 'Y']]
+  df_match = df_match[['Team','Act Name','Action', 'Min', 'Sub 1', 'Sub 2', 'Sub 3', 'Sub 4', 'GW', 'X', 'Y', 'X2', 'Y2']]
   df_match = df_match[(df_match['Action']=='shoot on target') | (df_match['Action']=='shoot off target') | (df_match['Action']=='shoot blocked') | (df_match['Action']=='goal') | (df_match['Action']=='penalty goal') | (df_match['Action']=='penalty missed')]
   df_match = df_match.reset_index()
   df_match = df_match.sort_values(by=['index'], ascending=False)
@@ -27,7 +27,7 @@ def assign_xg(data):
   shots['Mins'] = shots['Mins'].astype(float)
   shots = shots[shots['X'].notna()]
 
-  data = shots[['Act Name', 'Team', 'Action', 'Mins', 'Sub 1', 'Sub 2', 'Sub 3', 'Sub 4', 'X', 'Y']]
+  data = shots[['Act Name', 'Team', 'Action', 'Mins', 'Sub 1', 'Sub 2', 'Sub 3', 'Sub 4', 'X', 'Y', 'X2', 'Y2']]
   data.loc[(data['Action'].str.contains('penalty goal')), 'Sub 3'] = 'Penalty'
   data.loc[(data['Action'].str.contains('penalty goal')), 'Sub 1'] = 'Right Foot'
   data.loc[(data['Action'].str.contains('penalty missed')), 'Sub 3'] = 'Penalty'
@@ -40,37 +40,37 @@ def assign_xg(data):
                                         ['Shot On','Shot Off','Shot Blocked','Goal','Goal','Shot Off'])
   dft = data.groupby('Action', as_index=False)
   temp = pd.DataFrame(columns = ['Player', 'Team','Event','Mins',
-                                 'Shot Type','Situation','X','Y'])
+                                 'Shot Type','Situation','X','Y', 'X2', 'Y2'])
   if (('Goal' in data['Action'].unique()) == True):
     df1 = dft.get_group('Goal')
-    df1f = df1[['Act Name', 'Team', 'Action', 'Mins', 'Sub 1', 'Sub 3', 'X', 'Y']]
+    df1f = df1[['Act Name', 'Team', 'Action', 'Mins', 'Sub 1', 'Sub 3', 'X', 'Y', 'X2', 'Y2']]
     df1f.rename(columns = {'Action':'Event', 'Sub 1':'Shot Type', 'Sub 3':'Situation', 'Act Name':'Player'}, inplace = True)
   else:
     df1f = temp.copy()
 
   if (('Shot On' in data['Action'].unique()) == True):
     df2 = dft.get_group('Shot On')
-    df2f = df2[['Act Name','Team', 'Action', 'Mins', 'Sub 2', 'Sub 3', 'X', 'Y']]
+    df2f = df2[['Act Name','Team', 'Action', 'Mins', 'Sub 2', 'Sub 3', 'X', 'Y', 'X2', 'Y2']]
     df2f.rename(columns = {'Action':'Event', 'Sub 2':'Shot Type', 'Sub 3':'Situation', 'Act Name':'Player'}, inplace = True)
   else:
     df2f = temp.copy()
 
   if (('Shot Off' in data['Action'].unique()) == True):
     df3 = dft.get_group('Shot Off')
-    df3f = df3[['Act Name','Team', 'Action', 'Mins', 'Sub 3', 'Sub 4', 'X', 'Y']]
+    df3f = df3[['Act Name','Team', 'Action', 'Mins', 'Sub 3', 'Sub 4', 'X', 'Y', 'X2', 'Y2']]
     df3f.rename(columns = {'Action':'Event', 'Sub 3':'Shot Type', 'Sub 4':'Situation', 'Act Name':'Player'}, inplace = True)
   else:
     df3f = temp.copy()
 
   if (('Shot Blocked' in data['Action'].unique()) == True):
     df4 = dft.get_group('Shot Blocked')
-    df4f = df4[['Act Name','Team', 'Action', 'Mins', 'Sub 2', 'Sub 3', 'X', 'Y']]
+    df4f = df4[['Act Name','Team', 'Action', 'Mins', 'Sub 2', 'Sub 3', 'X', 'Y', 'X2', 'Y2']]
     df4f.rename(columns = {'Action':'Event', 'Sub 2':'Shot Type', 'Sub 3':'Situation', 'Act Name':'Player'}, inplace = True)
   else:
     df4f = temp.copy()
 
   sa = pd.concat([df1f, df2f, df3f, df4f])
-  sa = sa.dropna()
+  #sa = sa.dropna()
   sa.loc[(sa['Situation'].str.contains('Open play')), 'Situation'] = 'Open Play'
   sa.loc[(sa['Situation'].str.contains('Freekick')), 'Situation'] = 'Set-Piece Free Kick'
   sa.loc[(sa['Shot Type'].str.contains('Header')), 'Shot Type'] = 'Head'
@@ -83,8 +83,8 @@ def assign_xg(data):
   x=df_co['x']*1.05
   y=df_co['c']*0.68
 
-  df_co['X2']=(100-df_co['X'])*1.05
-  df_co['Y2']=df_co['Y']*0.68
+  df_co['X3']=(100-df_co['X'])*1.05
+  df_co['Y3']=df_co['Y']*0.68
 
   df_co['Distance'] = np.sqrt(x**2 + y**2)
   c=7.32
@@ -106,11 +106,11 @@ def assign_xg(data):
 
   df_co = df_co.sort_values(by=['Mins'])
   df_co = df_co.reset_index()
-  shotdata = df_co[['Player','Team','Event','Mins','Shot Type','Situation','X2','Y2','Distance','Angle Rad','Angle Degrees','goal']]
+  shotdata = df_co[['Player','Team','Event','Mins','Shot Type','Situation','X3','Y3','Distance','Angle Rad','Angle Degrees','goal','X2','Y2']]
 
   shots = shotdata.dropna()
   shots.rename(columns = {'Player':'player', 'Event':'event', 'Mins':'mins', 'Shot Type':'shottype',
-                          'Situation':'situation','X2':'X','Y2':'Y', 'Distance':'distance',
+                          'Situation':'situation','X3':'X','Y3':'Y', 'Distance':'distance',
                           'Angle Rad':'anglerad','Angle Degrees':'angledeg'}, inplace = True)
 
   body_part_list=[]
@@ -146,7 +146,7 @@ def assign_xg(data):
   dfxg = dfxg.assign(xG=xG)
   dfxg['xG'] = dfxg.apply(lambda row: xgfix(row), axis=1)
 
-  fixdata = df_co[['Player', 'Team', 'Event', 'Mins', 'X', 'Y']]
+  fixdata = df_co[['Player', 'Team', 'Event', 'Mins', 'X', 'Y', 'X2', 'Y2']]
   fixdata['xG'] = dfxg['xG']
 
   return fixdata
