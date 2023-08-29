@@ -133,38 +133,38 @@ with tab1:
         if all_players:
             if arah_shot:
                 for i in range(len(df_team)):
-                if (df_team['Event'][i] == 'Goal' or df_team['Event'][i] == 'Penalty Goal'):
-                    ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
-                               c='#7ed957', marker='o', edgecolors='#000000', lw=3.5, zorder=10)
-                    pitch.arrows(df_team['X'][i], df_team['Y'][i],df_team['X2'][i], df_team['Y2'][i],
-                                 width=4, headwidth=8, headlength=10, color='#7ed957', ax=ax)
-                elif (df_team['Event'][i] == 'Shot On'):
-                    ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
-                               c='#f2ff00', marker='o', edgecolors='#000000', lw=3.5, zorder=10)
-                    pitch.arrows(df_team['X'][i], df_team['Y'][i],df_team['X2'][i], df_team['Y2'][i],
-                                 width=4, headwidth=8, headlength=10, color='#f2ff00', ax=ax)
-                elif (df_team['Event'][i] == 'Shot Off'):
-                    ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
-                               c='#a6a6a6', marker='o', edgecolors='#000000', lw=3.5, zorder=10)
-                    pitch.arrows(df_team['X'][i], df_team['Y'][i],df_team['X2'][i], df_team['Y2'][i],
-                                 width=4, headwidth=8, headlength=10, color='#a6a6a6', ax=ax)
-                else:
-                    ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
-                               c='#e66009', marker='o', edgecolors='#000000', lw=3.5, zorder=10)
+                    if (df_team['Event'][i] == 'Goal' or df_team['Event'][i] == 'Penalty Goal'):
+                        ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
+                                   c='#7ed957', marker='o', edgecolors='#000000', lw=3.5, zorder=10)
+                        pitch.arrows(df_team['X'][i], df_team['Y'][i],df_team['X2'][i], df_team['Y2'][i],
+                                     width=4, headwidth=8, headlength=10, color='#7ed957', ax=ax)
+                    elif (df_team['Event'][i] == 'Shot On'):
+                        ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
+                                   c='#f2ff00', marker='o', edgecolors='#000000', lw=3.5, zorder=10)
+                        pitch.arrows(df_team['X'][i], df_team['Y'][i],df_team['X2'][i], df_team['Y2'][i],
+                                     width=4, headwidth=8, headlength=10, color='#f2ff00', ax=ax)
+                    elif (df_team['Event'][i] == 'Shot Off'):
+                        ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
+                                   c='#a6a6a6', marker='o', edgecolors='#000000', lw=3.5, zorder=10)
+                        pitch.arrows(df_team['X'][i], df_team['Y'][i],df_team['X2'][i], df_team['Y2'][i],
+                                     width=4, headwidth=8, headlength=10, color='#a6a6a6', ax=ax)
+                    else:
+                        ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
+                                   c='#e66009', marker='o', edgecolors='#000000', lw=3.5, zorder=10)
             else:
                 for i in range(len(df_team)):
-                if (df_team['Event'][i] == 'Goal' or df_team['Event'][i] == 'Penalty Goal'):
-                    ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
-                               c='#7ed957', marker='o', edgecolors='#000000', lw=3.5)
-                elif (df_team['Event'][i] == 'Shot On'):
-                    ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
-                               c='#f2ff00', marker='o', edgecolors='#000000', lw=3.5)
-                elif (df_team['Event'][i] == 'Shot Off'):
-                    ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
-                               c='#a6a6a6', marker='o', edgecolors='#000000', lw=3.5)
-                else:
-                    ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
-                               c='#e66009', marker='o', edgecolors='#000000', lw=3.5)
+                    if (df_team['Event'][i] == 'Goal' or df_team['Event'][i] == 'Penalty Goal'):
+                        ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
+                                   c='#7ed957', marker='o', edgecolors='#000000', lw=3.5)
+                    elif (df_team['Event'][i] == 'Shot On'):
+                        ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
+                                   c='#f2ff00', marker='o', edgecolors='#000000', lw=3.5)
+                    elif (df_team['Event'][i] == 'Shot Off'):
+                        ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
+                                   c='#a6a6a6', marker='o', edgecolors='#000000', lw=3.5)
+                    else:
+                        ax.scatter(df_team['Y'][i], df_team['X'][i], s=df_team['xG'][i]*10000,
+                                   c='#e66009', marker='o', edgecolors='#000000', lw=3.5)
 
             annot_texts = ['Goals', 'Shots\nOn Target', 'Shots\nOff Target', 'Shots\nBlocked', 'xG Total']
             annot_x = [10.83 + x*17.83 for x in range(0,5)]
@@ -219,18 +219,18 @@ with tab1:
     
         else:
             for i in range(len(df_player)):
-            if (df_player['Event'][i] == 'Goal' or df_player['Event'][i] == 'Penalty Goal'):
-                ax.scatter(df_player['Y'][i], df_player['X'][i], s=df_player['xG'][i]*10000,
-                           c='#7ed957', marker='o', edgecolors='#000000', lw=3.5)
-            elif (df_player['Event'][i] == 'Shot On'):
-                ax.scatter(df_player['Y'][i], df_player['X'][i], s=df_player['xG'][i]*10000,
-                           c='#f2ff00', marker='o', edgecolors='#000000', lw=3.5)
-            elif (df_player['Event'][i] == 'Shot Off'):
-                ax.scatter(df_player['Y'][i], df_player['X'][i], s=df_player['xG'][i]*10000,
-                           c='#a6a6a6', marker='o', edgecolors='#000000', lw=3.5)
-            else:
-                ax.scatter(df_player['Y'][i], df_player['X'][i], s=df_player['xG'][i]*10000,
-                           c='#e66009', marker='o', edgecolors='#000000', lw=3.5)
+                if (df_player['Event'][i] == 'Goal' or df_player['Event'][i] == 'Penalty Goal'):
+                    ax.scatter(df_player['Y'][i], df_player['X'][i], s=df_player['xG'][i]*10000,
+                               c='#7ed957', marker='o', edgecolors='#000000', lw=3.5)
+                elif (df_player['Event'][i] == 'Shot On'):
+                    ax.scatter(df_player['Y'][i], df_player['X'][i], s=df_player['xG'][i]*10000,
+                               c='#f2ff00', marker='o', edgecolors='#000000', lw=3.5)
+                elif (df_player['Event'][i] == 'Shot Off'):
+                    ax.scatter(df_player['Y'][i], df_player['X'][i], s=df_player['xG'][i]*10000,
+                               c='#a6a6a6', marker='o', edgecolors='#000000', lw=3.5)
+                else:
+                    ax.scatter(df_player['Y'][i], df_player['X'][i], s=df_player['xG'][i]*10000,
+                               c='#e66009', marker='o', edgecolors='#000000', lw=3.5)
 
             annot_texts = ['Goals', 'xG', 'Shots', 'Conversion\nRatio (%)', 'xG/Shots']
             annot_x = [10.83 + x*17.83 for x in range(0,5)]
