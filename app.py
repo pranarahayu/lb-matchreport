@@ -287,7 +287,7 @@ with tab1:
                                      file_name=fn, mime="image/jpg")
 
 with tab2:
-    tab2.subheader('Generate Key Pass Map Network')
+    tab2.subheader('Generate Key Pass Map')
     col1, col2 = st.columns(2)
     with col1:
         tl_data2 = st.file_uploader("Upload file timeline excel!", key=3)
