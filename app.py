@@ -290,19 +290,19 @@ with tab2:
     tab2.subheader('Generate Key Pass Map Network')
     col1, col2 = st.columns(2)
     with col1:
-        tl_data = st.file_uploader("Upload file timeline excel!", key=3)
+        tl_data2 = st.file_uploader("Upload file timeline excel!", key=3)
         try:
-            df_t = pd.read_excel(tl_data, skiprows=[0])
+            df_t2 = pd.read_excel(tl_data2, skiprows=[0])
         except ValueError:
             st.error("Please upload the timeline file")
 
     with col2:
-        m_data = st.file_uploader("Upload file report excel!", key=4)
+        m_data3 = st.file_uploader("Upload file report excel!", key=4)
         try:
-            df_m = pd.read_excel(m_data, skiprows=[0])
-            team1 = df_m['Team'][0]
-            team2 = df_m['Opponent'][0]
-            df_m2 = df_m[['Name']]
+            df_m3 = pd.read_excel(m_data3, skiprows=[0])
+            team3 = df_m3['Team'][0]
+            team4 = df_m3['Opponent'][0]
+            df_m4 = df_m3[['Name']]
         except ValueError:
             st.error("Please upload the excel report file")
 
@@ -321,7 +321,7 @@ with tab2:
     path_eff = [path_effects.Stroke(linewidth=2, foreground='#ffffff'),
                 path_effects.Normal()]
     
-    df_match = df_t[['Team','Act Name','Action', 'Sub 3', 'Min', 'GW', 'X', 'Y', 'X2', 'Y2']]
+    df_match = df_t2[['Team','Act Name','Action', 'Sub 3', 'Min', 'GW', 'X', 'Y', 'X2', 'Y2']]
     df_match = df_match[(df_match['Action']=='key pass') | (df_match['Action']=='assist')]
     df_match = df_match[df_match['X'].notna()]
     #df_match = df_match[(df_match['Action']=='key pass')]
