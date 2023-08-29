@@ -308,7 +308,7 @@ with tab2:
 
     colx, coly = st.columns(2)
     with colx:
-        filter = st.selectbox('Select Team', [team1, team2], key=2)
+        filter2 = st.selectbox('Select Team', [team1, team2], key=2)
     github_url = 'https://github.com/google/fonts/blob/main/ofl/poppins/Poppins-Bold.ttf'
     url = github_url + '?raw=true'
 
@@ -335,7 +335,7 @@ with tab2:
                           pad_right=0.5, pad_left=0.5, stripe=True, linewidth=3.5)
     pitch.draw(ax=ax)
 
-    df_team2 = df_match[df_match['Team'] == 'filter'].reset_index(drop=True) ##TEAM
+    df_team2 = df_match[df_match['Team'] == filter2].reset_index(drop=True) ##TEAM
 
     for i in range(len(df_team2)):
         if (df_team2['Action'][i] == 'key pass'):
