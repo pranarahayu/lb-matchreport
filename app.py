@@ -66,7 +66,7 @@ with tab1:
     path_eff = [path_effects.Stroke(linewidth=2, foreground='#ffffff'),
                 path_effects.Normal()]
 
-    fixdata = assignxg(df_t)
+    fixdata = assign_xg(df_t)
 
     tempdata = fixdata[['Player', 'Team', 'xG']]
     tempdata = tempdata.groupby(['Player', 'Team'], as_index=False).sum()
