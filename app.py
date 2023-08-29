@@ -290,14 +290,14 @@ with tab2:
     tab2.subheader('Generate Key Pass Map Network')
     col1, col2 = st.columns(2)
     with col1:
-        tl_data = st.file_uploader("Upload file timeline excel!")
+        tl_data = st.file_uploader("Upload file timeline excel!", key=3)
         try:
             df_t = pd.read_excel(tl_data, skiprows=[0])
         except ValueError:
             st.error("Please upload the timeline file")
 
     with col2:
-        m_data = st.file_uploader("Upload file report excel!")
+        m_data = st.file_uploader("Upload file report excel!", key=4)
         try:
             df_m = pd.read_excel(m_data, skiprows=[0])
             team1 = df_m['Team'][0]
@@ -377,4 +377,4 @@ with tab2:
     with open('pmap.jpg', 'rb') as img:
         fn = 'PassesMap_'+filter+'.jpg'
         btn = st.download_button(label="Download Pass Map!", data=img,
-                                 file_name=fn, mime="image/jpg")
+                                 file_name=fn, mime="image/jpg", key=5)
