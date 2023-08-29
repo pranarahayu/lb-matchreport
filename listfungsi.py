@@ -106,7 +106,7 @@ def assign_xg(data):
 
   df_co = df_co.sort_values(by=['Mins'])
   df_co = df_co.reset_index()
-  shotdata = df_co[['Player','Team','Event','Mins','Shot Type','Situation','X3','Y3','Distance','Angle Rad','Angle Degrees','goal','X2','Y2']]
+  shotdata = df_co[['Player','Team','Event','Mins','Shot Type','Situation','X3','Y3','Distance','Angle Rad','Angle Degrees','goal']]
 
   shots = shotdata.dropna()
   shots.rename(columns = {'Player':'player', 'Event':'event', 'Mins':'mins', 'Shot Type':'shottype',
