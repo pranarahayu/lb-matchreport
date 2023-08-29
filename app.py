@@ -26,12 +26,6 @@ import xgmodel
 from xgmodel import calculate_xG
 from xgmodel import xgfix
 
-sys.path.append("listfungsi.py")
-import listfungsi
-from listfungsi import assign_xg
-from listfungsi import get_PNdata
-from listfungsi import plot_PN
-
 with st.expander("BACA INI DULU."):
     st.write("Aplikasinya kelihatan error karena kedua file yang diperlukan belum diupload, upload dulu. Untuk file timeline, pastikan tambahkan kolom X, Y, dan GW dulu. Format excelnya gak usah ada yang diganti, ya. Untuk file report excelnya, langsung upload aja, gak ada yang perlu diubah.")
 
