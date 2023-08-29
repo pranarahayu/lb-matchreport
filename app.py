@@ -29,7 +29,7 @@ from xgmodel import xgfix
 with st.expander("BACA INI DULU."):
     st.write("Aplikasinya kelihatan error karena kedua file yang diperlukan belum diupload, upload dulu. Untuk file timeline, pastikan tambahkan kolom X, Y, dan GW dulu. Format excelnya gak usah ada yang diganti, ya. Untuk file report excelnya, langsung upload aja, gak ada yang perlu diubah.")
 
-tab1, tab2 = st.tabs(['**Shot Map**', '**Passing Network**'])
+tab1, tab2 = st.tabs(['**Shot Map**', '**Pass Map**'])
 
 with tab1:
     tab1.subheader('Generate Shot Map')
