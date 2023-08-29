@@ -335,29 +335,29 @@ with tab2:
                           pad_right=0.5, pad_left=0.5, stripe=True, linewidth=3.5)
     pitch.draw(ax=ax)
 
-    df_team = df_match[df_match['Team'] == 'filter'].reset_index(drop=True) ##TEAM
+    df_team2 = df_match[df_match['Team'] == 'filter'].reset_index(drop=True) ##TEAM
 
-    for i in range(len(df_team)):
-        if (df_team['Action'][i] == 'key pass'):
-            pitch.lines(df_team['X'][i], df_team['Y'][i], df_team['X2'][i], df_team['Y2'][i],
+    for i in range(len(df_team2)):
+        if (df_team2['Action'][i] == 'key pass'):
+            pitch.lines(df_team2['X'][i], df_team2['Y'][i], df_team2['X2'][i], df_team2['Y2'][i],
                         lw=8, transparent=True, comet=True, ax=ax,
                         color='#A4031F', alpha=0.5)
-            pitch.scatter(df_team['X2'][i], df_team['Y2'][i], lw=3, ax=ax,
+            pitch.scatter(df_team2['X2'][i], df_team2['Y2'][i], lw=3, ax=ax,
                           color='#A4031F', alpha=1, marker='o', zorder=2, s=150)
         else:
-            pitch.lines(df_team['X'][i], df_team['Y'][i], df_team['X2'][i], df_team['Y2'][i],
+            pitch.lines(df_team2['X'][i], df_team2['Y'][i], df_team2['X2'][i], df_team2['Y2'][i],
                         lw=8, transparent=True, comet=True, ax=ax,
                         color='#175676', alpha=0.5)
-            pitch.scatter(df_team['X2'][i], df_team['Y2'][i], lw=3, ax=ax,
+            pitch.scatter(df_team2['X2'][i], df_team2['Y2'][i], lw=3, ax=ax,
                           color='#175676', alpha=1, marker='o', zorder=2, s=150)
 
 #ax.add_patch(FancyBboxPatch((0.65, 50.5), 35, 1.35, fc='#cbfd06', ec='#cbfd06', lw=2))
-    ax.annotate(text=filter.upper(), size=32, xy=(0, 102), xytext=(0,-18),
+    ax.annotate(text=filter.upper(), size=24, xy=(0, 102), xytext=(0,-18),
                 textcoords='offset points', color='black', ha='left',
                 zorder=9, va='center', fontproperties=bold) ##TEAM
 
-    kpass = df_team[df_team['Action']=='key pass']['Action'].count()
-    asis = df_team[df_team['Action']=='assist']['Action'].count()
+    kpass = df_team2[df_team2['Action']=='key pass']['Action'].count()
+    asis = df_team2[df_team2['Action']=='assist']['Action'].count()
 
     annot_texts = ['Key Pass', 'Assist']
     annot_x = [77.5 + x*13 for x in range(0,2)]
