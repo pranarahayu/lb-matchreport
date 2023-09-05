@@ -51,7 +51,7 @@ with tab1:
             df_m = pd.read_excel(m_data, skiprows=[0])
             team1 = df_m['Team'][0]
             team2 = df_m['Opponent'][0]
-            df_m2 = df_m[['Name']]
+            df_m2 = df_m[['Name', 'Team']]
         except ValueError:
             st.error("Please upload the excel report file")
 
@@ -72,12 +72,13 @@ with tab1:
 
     fixdata = assign_xg(df_t)
 
-    tempdata = fixdata[['Player', 'Team', 'xG']]
-    tempdata = tempdata.groupby(['Player', 'Team'], as_index=False).sum()
+    tempdata = fixdata[['Player', 'xG']]
+    tempdata = tempdata.groupby('Player', as_index=False).sum()
     tempdata = tempdata.rename(columns={'Player':'Name'})
 
     findata = pd.merge(df_m2,tempdata,on='Name',how='left')
     findata['xG'].fillna(0, inplace=True)
+    findata['xG'] = findata['xG'].astype(float)
     findata['xG'] = round(findata['xG'],2)
 
     with coly:
