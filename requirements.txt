@@ -1,7 +1,7 @@
 streamlit
 pandas
 mplsoccer
-matplotlib
+matplotlib == 3.7.2
 numpy
 scikit-learn
 statsmodels
