@@ -57,8 +57,12 @@ def assign_xg(data):
 
   if (('Shot Off' in data['Action'].unique()) == True):
     df3 = dft.get_group('Shot Off')
-    df3f = df3[['Act Name','Team', 'Action', 'Mins', 'Sub 3', 'Sub 4', 'X', 'Y', 'X2', 'Y2']]
-    df3f.rename(columns = {'Action':'Event', 'Sub 3':'Shot Type', 'Sub 4':'Situation', 'Act Name':'Player'}, inplace = True)
+    if (('Penalty' in df3['Sub 3'].unique()) == True):
+      df3f = df3[['Act Name','Team', 'Action', 'Mins', 'Sub 2', 'Sub 3', 'X', 'Y']]
+      df3f.rename(columns = {'Action':'Event', 'Sub 2':'Shot Type', 'Sub 3':'Situation', 'Act Name':'Player'}, inplace = True)
+    else:
+      df3f = df3[['Act Name','Team', 'Action', 'Mins', 'Sub 3', 'Sub 4', 'X', 'Y']]
+      df3f.rename(columns = {'Action':'Event', 'Sub 3':'Shot Type', 'Sub 4':'Situation', 'Act Name':'Player'}, inplace = True)
   else:
     df3f = temp.copy()
 
