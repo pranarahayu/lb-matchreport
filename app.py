@@ -353,7 +353,7 @@ with tab2:
                           color='#175676', alpha=1, marker='o', zorder=2, s=150)
 
 #ax.add_patch(FancyBboxPatch((0.65, 50.5), 35, 1.35, fc='#cbfd06', ec='#cbfd06', lw=2))
-    ax.annotate(text=filter.upper(), size=24, xy=(0, 102), xytext=(0,-18),
+    ax.annotate(text=filter2.upper(), size=24, xy=(0, 102), xytext=(0,-18),
                 textcoords='offset points', color='black', ha='left',
                 zorder=9, va='center', fontproperties=bold) ##TEAM
 
