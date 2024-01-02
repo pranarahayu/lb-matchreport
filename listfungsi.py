@@ -23,6 +23,7 @@ def assign_xg(data):
 
   #Cleaning Data
   shots = df_match.copy()
+  #shots['Min'] = shots['Min'].str.split(' :').str[0]
   shots['Mins'] = shots['Min']
   shots['Mins'] = shots['Mins'].astype(float)
   shots = shots[shots['X'].notna()]
